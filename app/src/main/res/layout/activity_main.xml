@@ -7,16 +7,19 @@
     android:layout_height="match_parent"
     android:background="@color/dm_bg_primary">
 
-    <!-- Main content -->
+    <!-- NỘI DUNG CHÍNH -->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Vùng chứa fragment: CHÚ Ý paddingBottom = chiều cao bottom bar -->
         <FrameLayout
             android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:paddingBottom="64dp" />
 
+        <!-- Bottom bar -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomBar"
             android:layout_width="match_parent"
@@ -25,10 +28,10 @@
             android:background="@color/dm_bg_card"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
-            app:menu="@menu/menu_bottom"/>
+            app:menu="@menu/menu_bottom" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <!-- Left sidebar = channel list -->
+    <!-- NAV trái: danh sách channel (nếu cần) -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navChannels"
         android:layout_width="280dp"
@@ -36,5 +39,6 @@
         android:layout_gravity="start"
         android:background="@color/dm_bg_card"
         app:headerLayout="@layout/view_channel_header"
-        app:menu="@menu/menu_channels"/>
+        app:menu="@menu/menu_channels" />
+
 </androidx.drawerlayout.widget.DrawerLayout>

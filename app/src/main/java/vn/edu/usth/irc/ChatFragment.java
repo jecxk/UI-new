@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,11 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import vn.edu.usth.irc.Adapter.MessageAdapter;
 import vn.edu.usth.irc.databinding.FragmentChatBinding;
+import vn.edu.usth.irc.model.Message;
 
 public class ChatFragment extends Fragment {
 
     private static final String ARG_TITLE = "arg_title";
+
     public static ChatFragment newInstance(String title) {
         ChatFragment f = new ChatFragment();
         Bundle b = new Bundle();
@@ -34,7 +39,9 @@ public class ChatFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         b = FragmentChatBinding.inflate(inflater, container, false);
 
-        String title = getArguments() != null ? getArguments().getString(ARG_TITLE, "Chat") : "Chat";
+        String title = (getArguments() != null)
+                ? getArguments().getString(ARG_TITLE, "#Chat")
+                : "#Chat";
         b.toolbar.setTitle(title);
         b.toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
         b.toolbar.setOnMenuItemClickListener(item -> {
@@ -48,36 +55,40 @@ public class ChatFragment extends Fragment {
             return false;
         });
 
+        // RecyclerView
         b.rvMessages.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new MessageAdapter(dummyMessages());
         b.rvMessages.setAdapter(adapter);
 
-        b.btnStar.setOnClickListener(v -> {}); // TODO: toggle favorite
-        b.btnUpload.setOnClickListener(v -> {}); // TODO: upload
-        b.btnAttach.setOnClickListener(v -> {}); // TODO: attach
+        // Gửi bằng nút
+        b.btnSend.setOnClickListener(v -> sendCurrentText());
 
-        b.etMessage.setOnEditorActionListener((tv, actionId, event) -> {
-            String text = tv.getText().toString().trim();
-            if (!text.isEmpty()) {
-                adapter.addRightMessage(text);
-                b.rvMessages.scrollToPosition(adapter.getItemCount() - 1);
-                tv.setText("");
+        // Gửi bằng nút "Send" trên bàn phím
+        b.etMessage.setImeOptions(EditorInfo.IME_ACTION_SEND);
+        b.etMessage.setOnEditorActionListener((TextView tv, int actionId, android.view.KeyEvent event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                sendCurrentText();
+                return true;
             }
-            return true;
+            return false;
         });
 
         return b.getRoot();
     }
 
+    private void sendCurrentText() {
+        String text = b.etMessage.getText().toString().trim();
+        if (text.isEmpty()) return;
+
+        adapter.addRightMessage(text);
+        b.rvMessages.scrollToPosition(adapter.getItemCount() - 1);
+        b.etMessage.setText("");
+    }
+
     private List<Message> dummyMessages() {
         List<Message> list = new ArrayList<>();
-        list.add(Message.left("Is this your uni?"));
-        list.add(Message.left("I think it's great!"));
-        list.add(Message.system("10d"));
-        list.add(Message.left("Yes! Thank you"));
-        list.add(Message.right("Message 1"));
-        list.add(Message.right("Message 2"));
-        list.add(Message.right("I hate IRC client"));
+        list.add(Message.left("Welcome to #Chat"));
+        list.add(Message.right("Hello everyone!"));
         return list;
     }
 }

@@ -1,3 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Tên app -->
     <string name="app_name">IRC</string>
+
+    <!-- Fragment Chat -->
+    <string name="message">Message</string>
+    <string name="send">Send</string>
+
+    <!-- (tuỳ chọn) nhãn cho bottom bar / menu -->
+    <string name="home">Home</string>
+    <string name="messages">Message</string>
+    <string name="settings">Settings</string>
 </resources>

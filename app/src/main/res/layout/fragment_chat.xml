@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="@color/dm_bg_primary">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent" android:layout_height="56dp"
+        android:background="@color/dm_bg_primary"
+        app:navigationIcon="@android:drawable/ic_media_previous"
+        app:title="Thanh" app:titleTextColor="@color/dm_text_primary"
+        app:menu="@menu/menu_chat_top"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMessages"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"/>
+
+    <!-- input bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        android:background="@color/dm_bg_card">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="32dp" android:layout_height="32dp"
+            android:src="@mipmap/ic_launcher_round"/>
+
+        <EditText
+            android:id="@+id/etMessage"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:hint="Message"
+            android:textColor="@color/dm_text_primary"
+            android:textColorHint="@color/dm_text_secondary"
+            android:paddingHorizontal="12dp"
+            android:background="@drawable/bg_input"/>
+
+        <ImageButton
+            android:id="@+id/btnStar"
+            android:layout_width="40dp" android:layout_height="40dp"
+            android:contentDescription="Star"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_star"/>
+
+        <ImageButton
+            android:id="@+id/btnUpload"
+            android:layout_width="40dp" android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Upload" android:src="@drawable/ic_upload"/>
+
+        <ImageButton
+            android:id="@+id/btnAttach"
+            android:layout_width="40dp" android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Attach" android:src="@drawable/ic_attach"/>
+    </LinearLayout>
+</LinearLayout>

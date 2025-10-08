@@ -1,0 +1,13 @@
+<resources>
+    <color name="dm_bg_primary">#0F1013</color>
+    <color name="dm_bg_card">#1A1C20</color>
+    <color name="dm_bg_input">#2B2E34</color>
+    <color name="dm_text_primary">#EDEEF0</color>
+    <color name="dm_text_secondary">#B8BCC6</color>
+    <color name="dm_accent">#8AB4F8</color>
+    <color name="dm_online">#2ECC71</color>
+    <color name="dm_warning">#FF4D4F</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>
